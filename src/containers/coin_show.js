@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { fetchCoinDetail } from '../actions';
+import { fetchCoin } from '../actions';
 import { accounting } from 'accounting';
 
 class CoinShow extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.fetchCoinDetail(id);
+    this.props.fetchCoin(id);
   }
   render() {
     console.log(this.props.match);
     const { coins } = this.props;
-    if (!coins) {
-      return <div>Loading...</div>;
-    };
+    if (!coins) {return <div>Loading...</div>;};
     return (
       <div className="cost-show">
         <h1>{coins.name}</h1>
@@ -30,4 +28,4 @@ class CoinShow extends Component {
 function mapStateToProps({ coins }, ownProps) {
 return { coins: coins[ownProps.match.params.id] };
 }
-export default connect(mapStateToProps, { fetchCoinDetail })(CoinShow);
+export default connect(mapStateToProps, { fetchCoin })(CoinShow);
